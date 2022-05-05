@@ -1,0 +1,7 @@
+---
+roles:
+- src: https://github.com/CupNoodles/tasty-ansible
+  version: master
+
+collections:
+  - name: community.crypto

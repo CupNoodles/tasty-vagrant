@@ -1,0 +1,4 @@
+.vagrant/
+provisioning/virtualbox-hosts.yml
+collections/
+roles/

@@ -1,0 +1,5 @@
+# Provision a TastyIgniter stand-alone servers
+---
+- hosts: ti_vms
+  roles:
+    - { role: tasty-ansible, become: true }

@@ -1,0 +1,12 @@
+all:
+  children:
+    ti_vms:
+      hosts:
+        tastyigniter-example.vm: # <-- this is the hostname that will be put into your /etc/hosts file - make it match hostname below or else you'll get CORS issues when using the VM
+          hostname: "tastyigniter-example.vm"
+          ansible_host: 192.168.56.1 # this must be in range 192.168.56.0/21 (192.168.56.0 - 192.168.63.255)
+          http_port: 8080
+          https_port: 4443
+          ansible_port: 2220
+          disable_combiner: true
+          ti_version_tag: '3.x'

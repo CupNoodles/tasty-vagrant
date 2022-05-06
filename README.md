@@ -51,8 +51,10 @@ all:
           http_port: 8080
           https_port: 4443
           ansible_port: 2220
+          ssh_port: 2220
           disable_combiner: true
           ti_version_tag: '3.x'
+          ansible_host: 127.0.0.1
 ```
 
 You can create multiple VM configurations here by creating another `hosts:` entry as follows. Each host must have a unique name, IP address, and port numbers.
@@ -67,6 +69,7 @@ You can create multiple VM configurations here by creating another `hosts:` entr
         ansible_port: 2220
         disable_combiner: true
         ti_version_tag: '3.x'
+        ansible_host: 127.0.0.1
       burger-joint.vm
         hostname: "tastyigniter-example.vm"
         ansible_host: 192.168.56.2
@@ -74,6 +77,8 @@ You can create multiple VM configurations here by creating another `hosts:` entr
         https_port: 4444
         ansible_port: 2221
         disable_combiner: false
+        shared_folder_location: "/var/www/html"
+        ansible_host: 127.0.0.1
 ```
 
 Configuration variables for the ansible role can be set here in the hosts file - the whole list of available custom variables can be found at https://github.com/CupNoodles/tasty-ansible/blob/master/defaults/main.yml
@@ -84,3 +89,10 @@ From your installation directory, run `vagrant up`.
 
 If you've specified multiple hosts, you can manage individual boxes by name, ex. `vagrant up pizza-shop.vm` etc. 
 
+## Notes on Shared Folders
+
+If you're usually editing files with an IDE, it may be useful to set up shared folders with the `shared_folder_location` configuration option. As it is, this will create a two-way sync between the `shared/` folder in your project directory and a guest machine location of your choosing. Synced folders can be fiddly though, and your optimal solution will depend on your host/guest machine OSs and how much of your guest machine that needs to be shared. If it doesn't work out of the box, please refer to the [Vagrant documentation](https://www.vagrantup.com/docs/synced-folders) for other options.
+
+## Reverse Proxy setup
+
+You may notice that there are a few unnecessary networking and port configuration options, which you can use to set up a reverse proxy on your host machine. This is not at all necessary for working on the VM, but can be useful if, for instance, you need to remove the `:8080` from the URL, or if you're testing the website on a tablet device and thus need to share your VM on the local network.

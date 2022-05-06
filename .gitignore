@@ -2,3 +2,4 @@
 provisioning/virtualbox-hosts.yml
 collections/
 roles/
+shared/

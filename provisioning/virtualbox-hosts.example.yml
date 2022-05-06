@@ -3,10 +3,16 @@ all:
     ti_vms:
       hosts:
         tastyigniter-example.vm: # <-- this is the hostname that will be put into your /etc/hosts file - make it match hostname below or else you'll get CORS issues when using the VM
+          app_name: "TastyIgniter Testing"
           hostname: "tastyigniter-example.vm"
-          ansible_host: 192.168.56.1 # this must be in range 192.168.56.0/21 (192.168.56.0 - 192.168.63.255)
+          local_ip: 192.168.56.1 # this must be in range 192.168.56.0/21 (192.168.56.0 - 192.168.63.255)
           http_port: 8080
           https_port: 4443
-          ansible_port: 2220
+          # ansible_port and ssh_port should usually be the same (but unique across different VMs). 
+          ansible_port: 2200 # ssh port used by ansible
+          ssh_port: 2200   # ssh port used by vagrant 
+
           disable_combiner: true
           ti_version_tag: '3.x'
+          ansible_host: 127.0.0.1 # this is going to stay the same for most hosts. 
+          shared_folder_location: "/var/www/html" # this is the path you'd like to share on your guest machine.
